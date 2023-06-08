@@ -1,14 +1,15 @@
 
-## QuizSimple Service
+## Welcome
 
-# Welcome
+# QuizSimple Service
 
-This application contains different methods to make the application work  
-All the questions and answers are already stored in the database.  
+QuizSimple. A fun app used to take quizzes on general knowledge.  
+You can make your own quiz and choose how many questions there will be.  
+You can also choose the difficulty (Easy, Medium, Hard) for each question.  
+At the end, you can check your grade, your mistake and the correct answer.  
 
-You also need the client side to be able to use this web application.  
-Once you import the project, all you need to do is to run it and then go to the link provided below to access the client repository
+Once you import the project, all you need to do is to run it and then go to the link provided below to access the client repository  
 
-https://github.com/zeko450/Client_QuizSimple
+https://github.com/zeko450/Client_QuizSimple  
 
 
