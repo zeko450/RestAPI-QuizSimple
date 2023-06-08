@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <persistence-unit name="quiz_unit">
+        <class>cgodin.models.entities.Options</class>
+        <class>cgodin.models.entities.Question</class>
+        <class>cgodin.models.entities.Quiz</class>
+        <class>cgodin.models.entities.QuizQuestion</class>
+
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:mysql://mysql-zeko450.alwaysdata.net/zeko450_services?useSSL=false"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.connection.username" value="zeko450"/>
+            <property name="hibernate.connection.password" value="Alwaysdata2023"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>
