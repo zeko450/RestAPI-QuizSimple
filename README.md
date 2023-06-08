@@ -1,6 +1,4 @@
 
-## Welcome
-
 # QuizSimple Service
 
 QuizSimple. A fun app used to take quizzes on general knowledge.  
