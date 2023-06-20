@@ -1,4 +1,4 @@
-package cgodin.models.entities;
+package com.example.models.entities;
 
 import jakarta.persistence.*;
 

@@ -1,5 +1,8 @@
-package cgodin.models.dao;
-import cgodin.models.entities.*;
+package com.example.models.dao;
+import com.example.models.entities.Options;
+import com.example.models.entities.Question;
+import com.example.models.entities.Quiz;
+import com.example.models.entities.QuizQuestion;
 
 import java.util.List;
 

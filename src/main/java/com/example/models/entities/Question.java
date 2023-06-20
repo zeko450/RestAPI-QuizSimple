@@ -1,4 +1,4 @@
-package cgodin.models.entities;
+package com.example.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

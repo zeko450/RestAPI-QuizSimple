@@ -1,4 +1,4 @@
-package cgodin.models.entities;
+package com.example.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -13,7 +13,7 @@ public class Quiz {
     private int quizId;
     @Basic
     @Column(name = "Titre", nullable = true, length = 50)
-    private String b
+    private String titre;
     @JsonIgnore
     @OneToMany(mappedBy = "quizByQuizId")
     private Collection<QuizQuestion> quizQuestionsByQuizId;

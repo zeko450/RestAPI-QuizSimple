@@ -1,4 +1,4 @@
-package com.example.tprestapi;
+package com.example.service;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;

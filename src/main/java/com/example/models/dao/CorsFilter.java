@@ -1,4 +1,4 @@
-package com.example.dao;
+package com.example.models.dao;
 
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerResponseContext;

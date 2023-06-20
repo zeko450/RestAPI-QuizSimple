@@ -1,7 +1,11 @@
-package com.example.tprestapi;
+package com.example.service;
 
-import cgodin.models.dao.*;
-import cgodin.models.entities.*;
+import com.example.models.dao.ISystemDAO;
+import com.example.models.dao.SystemDAO;
+import com.example.models.entities.Options;
+import com.example.models.entities.Question;
+import com.example.models.entities.Quiz;
+import com.example.models.entities.QuizQuestion;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import java.util.*;
