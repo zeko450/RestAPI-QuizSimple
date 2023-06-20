@@ -1,21 +1,22 @@
-package cgodin.models.dao;
+package com.example.models.dao;
 
-import cgodin.models.entities.*;
+import com.example.models.entities.*;
 import jakarta.persistence.*;
 
 import java.util.*;
 
 public class SystemDAO implements ISystemDAO {
-    EntityManagerFactory factory = null;
-    EntityManager manager = null;
+
+    Datamanager dataManager = null;
+
+
 
     public SystemDAO() {
-        factory = Persistence.createEntityManagerFactory("quiz_unit");
-        manager = factory.createEntityManager();
+        this.dataManager = Datamanager.getInstanceManager();
     }
 
     private List<Question> getQuestionsByDifficulty(String difficulty) {
-        Query query = manager.createQuery("SELECT q FROM Question q WHERE q.difficulte =:dif");
+        Query query = dataManager.manager.createQuery("SELECT q FROM Question q WHERE q.difficulte =:dif");
         query.setParameter("dif", difficulty);
         List<Question> questions = query.getResultList();
         return questions;
@@ -40,12 +41,12 @@ public class SystemDAO implements ISystemDAO {
 
     @Override
     public Quiz addNewQuiz(String title) {
-        EntityTransaction transaction = manager.getTransaction();
+        EntityTransaction transaction = dataManager.manager.getTransaction();
         try {
             transaction.begin();
             Quiz quiz = new Quiz();
             quiz.setTitre(title);
-            manager.persist(quiz);
+            dataManager.manager.persist(quiz);
             transaction.commit();
             return quiz;
         } catch (Exception e) {
@@ -57,10 +58,10 @@ public class SystemDAO implements ISystemDAO {
 
     @Override
     public List<Question> addRandomQuestionsForQuiz(int QuizID, int N, String difficulty) {
-        EntityTransaction transaction = manager.getTransaction();
+        EntityTransaction transaction = dataManager.manager.getTransaction();
         transaction.begin();
         try {
-            Quiz quiz = manager.find(Quiz.class, QuizID);
+            Quiz quiz = dataManager.manager.find(Quiz.class, QuizID);
             if (quiz != null) {
                 List<Question> questions = getQuestionsByDifficulty(difficulty);
                 if (N > questions.size())
@@ -69,7 +70,7 @@ public class SystemDAO implements ISystemDAO {
                 for (Question question : randomQuestions) {
                     QuizQuestionPK quizQuestionPK = new QuizQuestionPK(quiz.getQuizId(), question.getQuestionId());
                     QuizQuestion quizQuestion = new QuizQuestion(quizQuestionPK, 0, quiz, question);
-                    manager.persist(quizQuestion);
+                    dataManager.manager.persist(quizQuestion);
                 }
                 transaction.commit();
                 return randomQuestions;
@@ -84,7 +85,7 @@ public class SystemDAO implements ISystemDAO {
 
     @Override
     public List<Question> getQuestionsForQuiz(int quizId) {
-        Query query = manager.createQuery(" SELECT q FROM Question q JOIN q.quizQuestionsByQuestionId qz WHERE qz.quizByQuizId.quizId=: Id");
+        Query query = dataManager.manager.createQuery(" SELECT q FROM Question q JOIN q.quizQuestionsByQuestionId qz WHERE qz.quizByQuizId.quizId=: Id");
         query.setParameter("Id", quizId);
         List<Question> questions = query.getResultList();
         return questions;
@@ -92,7 +93,7 @@ public class SystemDAO implements ISystemDAO {
 
     @Override
     public List<Options> optionsForQuestion(int questionId) {
-        Query query = manager.createQuery("SELECT o FROM Options o WHERE o.questionId = :questId");
+        Query query = dataManager.manager.createQuery("SELECT o FROM Options o WHERE o.questionId = :questId");
         query.setParameter("questId", questionId);
         List<Options> options = query.getResultList();
         return options;
@@ -102,7 +103,7 @@ public class SystemDAO implements ISystemDAO {
     //Si une question du quiz n'est pas complété, on considere que le quiz n'est pas validé
     public List<Quiz> getNotUsedQuizzes() {
 
-        Query query = manager.createQuery("SELECT q FROM Quiz q");
+        Query query = dataManager.manager.createQuery("SELECT q FROM Quiz q");
         List<Quiz> quizs = query.getResultList();
         List<Quiz> notusedQuizzes = new ArrayList<>();
         for (Quiz q: quizs) {
@@ -121,11 +122,11 @@ public class SystemDAO implements ISystemDAO {
 
     @Override
     public QuizQuestion updateQuizQuestion(int quizId, int questionId, int selectedOptionId) {
-        EntityTransaction transaction = manager.getTransaction();
+        EntityTransaction transaction = dataManager.manager.getTransaction();
         transaction.begin();
         try {
             QuizQuestionPK quizQuestionPK = new QuizQuestionPK(quizId, questionId);
-            QuizQuestion quizQuestion = manager.find(QuizQuestion.class, quizQuestionPK);
+            QuizQuestion quizQuestion = dataManager.manager.find(QuizQuestion.class, quizQuestionPK);
             if (quizQuestion != null) {
                 quizQuestion.setSelectedOptionID(selectedOptionId);
                 transaction.commit();
@@ -140,7 +141,7 @@ public class SystemDAO implements ISystemDAO {
 
     @Override
     public Options rightOptionsForQuestion(int questionId) {
-        Query query = manager.createQuery("SELECT o FROM Options o WHERE o.questionId =:questId and o.estVrai = true ");
+        Query query = dataManager.manager.createQuery("SELECT o FROM Options o WHERE o.questionId =:questId and o.estVrai = true ");
         query.setParameter("questId", questionId);
         Options option = (Options) query.getSingleResult();
         return option;
@@ -148,7 +149,7 @@ public class SystemDAO implements ISystemDAO {
 
     @Override
     public List<Quiz> getUsedQuizzes() {
-        Query query = manager.createQuery("SELECT q FROM Quiz q");
+        Query query = dataManager.manager.createQuery("SELECT q FROM Quiz q");
         List<Quiz> quizs = query.getResultList();
         List<Quiz> usedQuizs = new ArrayList<>();
         for (Quiz q: quizs) {
@@ -165,7 +166,7 @@ public class SystemDAO implements ISystemDAO {
 
     @Override
     public QuizQuestion getQuizQuestion(int quizId, int questionId) {
-        Query query = manager.createQuery("SELECT qq FROM QuizQuestion qq WHERE qq.id.quizId =:quizId and qq.id.questionId =:questId");
+        Query query = dataManager.manager.createQuery("SELECT qq FROM QuizQuestion qq WHERE qq.id.quizId =:quizId and qq.id.questionId =:questId");
         query.setParameter("quizId", quizId);
         query.setParameter("questId", questionId);
         QuizQuestion quizQuestion = (QuizQuestion) query.getSingleResult();
