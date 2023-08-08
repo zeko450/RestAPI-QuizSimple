@@ -1,14 +1,10 @@
 package com.example.service;
 
-import com.example.models.dao.ISystemDAO;
-import com.example.models.dao.SystemDAO;
-import com.example.models.entities.Options;
-import com.example.models.entities.Question;
-import com.example.models.entities.Quiz;
-import com.example.models.entities.QuizQuestion;
+import com.example.dao.ISystemDAO;
+import com.example.dao.SystemDAO;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import java.util.*;
+import jakarta.ws.rs.core.Response;
 
 @Path("/system")
 public class SystemResource {
@@ -22,69 +18,81 @@ public class SystemResource {
     @GET
     @Path("questions/{id}/options")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Options> optionsForQuestion(@PathParam("id")int questionId)
+    public Response optionsForQuestion(@PathParam("id")int questionId)
     {
-        return dao.optionsForQuestion(questionId);
+        Response.ResponseBuilder rb = Response.ok(dao.optionsForQuestion(questionId));
+        return rb.build();
+
     }
     @GET
     @Path("quiz/{id}/questions")
     @Produces(MediaType.APPLICATION_JSON)
-    public  List<Question> getQuestionsForQuiz(@PathParam("id")int quizId)
+    public  Response getQuestionsForQuiz(@PathParam("id")int quizId)
     {
-        return dao.getQuestionsForQuiz(quizId);
+        Response.ResponseBuilder rb = Response.ok(dao.getQuestionsForQuiz(quizId));
+        return rb.build();
+
     }
 
     @GET
     @Path("questions/{id}/rightanswer")
     @Produces(MediaType.APPLICATION_JSON)
-    public Options rightOptionsForQuestion(@PathParam("id")int questionId)
+    public Response rightOptionsForQuestion(@PathParam("id")int questionId)
     {
-        return dao.rightOptionsForQuestion(questionId);
+        Response.ResponseBuilder rb = Response.ok(dao.rightOptionsForQuestion(questionId));
+        return rb.build();
+
     }
 
     @GET
     @Path("notusedquizzes")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Quiz> getNotUsedQuizzes(){
-            return dao.getNotUsedQuizzes();
+    public Response getNotUsedQuizzes(){
+        Response.ResponseBuilder rb = Response.ok(dao.getNotUsedQuizzes());
+        return rb.build();
     }
 
     @GET
     @Path("usedquizes")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Quiz> getUsedQuizzes(){
-        return dao.getUsedQuizzes();
+    public Response getUsedQuizzes(){
+        Response.ResponseBuilder rb = Response.ok(dao.getUsedQuizzes());
+        return rb.build();
     }
 
     @GET
     @Path("quiz/{quizId}/question/{questionId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public QuizQuestion getQuizQuestion(@PathParam("quizId")int quizId, @PathParam("questionId")int questionId)
+    public Response getQuizQuestion(@PathParam("quizId")int quizId, @PathParam("questionId")int questionId)
     {
-        return dao.getQuizQuestion(quizId, questionId);
+        Response.ResponseBuilder rb = Response.ok(dao.getQuizQuestion(quizId, questionId));
+        return rb.build();
     }
 
     @POST
     @Path("quiz/{title}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Quiz addNewQuiz(@PathParam("title")String title)
+    public Response addNewQuiz(@PathParam("title")String title)
     {
-        return dao.addNewQuiz(title);
+        Response.ResponseBuilder rb = Response.ok(dao.addNewQuiz(title));
+        return rb.build();
     }
 
     @POST
     @Path("quiz/{id}/questions/{N}/{difficulty}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Question> addRandomQuestionsForQuiz(@PathParam("id")int quizId,@PathParam("N")int N, @PathParam("difficulty") String difficulty)
+    public Response addRandomQuestionsForQuiz(@PathParam("id")int quizId,@PathParam("N")int N, @PathParam("difficulty") String difficulty)
     {
-        return dao.addRandomQuestionsForQuiz(quizId, N, difficulty);
+        Response.ResponseBuilder rb = Response.ok(dao.addRandomQuestionsForQuiz(quizId, N, difficulty));
+        return rb.build();
     }
 
     @PUT
     @Path("quiz/{quizId}/question/{questionId}/answer/{selectedOptionId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public QuizQuestion updateQuizQuestion(@PathParam("quizId")int quizId, @PathParam("questionId")int questionId, @PathParam("selectedOptionId") int selectedOptionId)
+    public Response updateQuizQuestion(@PathParam("quizId")int quizId, @PathParam("questionId")int questionId, @PathParam("selectedOptionId") int selectedOptionId)
     {
-        return dao.updateQuizQuestion(quizId, questionId, selectedOptionId);
+        Response.ResponseBuilder rb = Response.ok(dao.updateQuizQuestion(quizId, questionId, selectedOptionId));
+        return rb.build();
     }
 }

@@ -5,10 +5,10 @@
              version="3.0">
 
     <persistence-unit name="quiz_unit">
-        <class>com.example.models.entities.Options</class>
-        <class>com.example.models.entities.Question</class>
-        <class>com.example.models.entities.Quiz</class>
-        <class>com.example.models.entities.QuizQuestion</class>
+        <class>com.example.models.Options</class>
+        <class>com.example.models.Question</class>
+        <class>com.example.models.Quiz</class>
+        <class>com.example.models.QuizQuestion</class>
 
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://mysql-zeko450.alwaysdata.net/zeko450_services?useSSL=false"/>
