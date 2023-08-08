@@ -1,8 +1,8 @@
-package com.example.models.dao;
-import com.example.models.entities.Options;
-import com.example.models.entities.Question;
-import com.example.models.entities.Quiz;
-import com.example.models.entities.QuizQuestion;
+package com.example.dao;
+import com.example.models.Options;
+import com.example.models.Question;
+import com.example.models.Quiz;
+import com.example.models.QuizQuestion;
 
 import java.util.List;
 

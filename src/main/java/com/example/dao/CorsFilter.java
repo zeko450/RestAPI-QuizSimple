@@ -1,4 +1,4 @@
-package com.example.models.dao;
+package com.example.dao;
 
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerResponseContext;
@@ -9,7 +9,6 @@ import java.io.IOException;
 public class CorsFilter implements ContainerResponseFilter {
     @Override
     public void filter(ContainerRequestContext requestContext,
-
                        ContainerResponseContext responseContext) throws IOException {
         responseContext.getHeaders().add(
                 "Access-Control-Allow-Origin", "*");
